@@ -1,5 +1,5 @@
 {
-  "name": "GoLocal",
+  "name": "quickz",
   "description": "A full-scale hyperlocal food, grocery, and instant delivery platform connecting customers, shops, and delivery partners.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

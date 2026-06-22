@@ -282,7 +282,7 @@ class AppRepository(private val context: Context) {
         }
 
         val prompt = """
-            You are GoLocal's Hyperlocal AI Search Assistant. 
+            You are quickz's Hyperlocal AI Search Assistant (everything nearby delivered quickly). 
             Below is the full catalog of products available in the user's vicinity in JSON format:
             $productsJsonArray
             

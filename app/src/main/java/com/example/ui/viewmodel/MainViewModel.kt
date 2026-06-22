@@ -220,7 +220,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val order = repository.orderDao.getOrderById(orderId) ?: return@launch
 
             val updatedOrder = order.copy(
-                status = "PREPARING", // transition from READY to PREPARING if vendor hadn't finished, or straight to PICKED_UP
+                status = order.status, // preserve the current preparation status
                 riderId = riderId,
                 riderName = rider.name,
                 riderLat = rider.latitude,

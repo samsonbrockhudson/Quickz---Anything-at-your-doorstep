@@ -68,17 +68,25 @@ fun MainDashboard(viewModel: MainViewModel) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             imageVector = Icons.Default.DeliveryDining,
-                            contentDescription = "GoLocal logo",
+                            contentDescription = "quickz logo",
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(32.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "GoLocal",
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 1.sp,
-                            fontSize = 24.sp
-                        )
+                        Column {
+                            Text(
+                                text = "quickz",
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 1.sp,
+                                fontSize = 20.sp
+                            )
+                            Text(
+                                text = "everything nearby delivered quickly",
+                                fontSize = 9.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
                     }
                 },
                 actions = {
@@ -820,7 +828,7 @@ fun CustomerMarketView(viewModel: MainViewModel) {
                                     }
                                     Spacer(modifier = Modifier.height(16.dp))
                                     Text(
-                                        text = "GoLocal Elite Club 👑",
+                                        text = "quickz Elite Club 👑",
                                         fontWeight = FontWeight.ExtraBold,
                                         fontSize = 20.sp,
                                         color = MaterialTheme.colorScheme.onBackground
@@ -1032,7 +1040,7 @@ fun CustomerAISearchView(viewModel: MainViewModel) {
             }
         } else if (aiSearchResult != null) {
             val result = aiSearchResult!!
-            Text(text = "GoLocal AI Recommendations:", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text(text = "quickz AI Recommendations:", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             
             // Response explanation bubble
             Card(
@@ -1606,8 +1614,8 @@ fun RiderView(viewModel: MainViewModel) {
         }
 
         // Active Tasks vs Available Orders
-        val activeDeliveringOrder = riderOrders.find { it.status == "ON_THE_WAY" || it.status == "PREPARING" || it.status == "READY" }
-        val availableOffers = allOrders.filter { it.status == "PENDING" && it.riderId == null }
+        val activeDeliveringOrder = riderOrders.find { it.status == "ON_THE_WAY" || it.status == "PREPARING" || it.status == "READY" || it.status == "PENDING" }
+        val availableOffers = allOrders.filter { (it.status == "PENDING" || it.status == "PREPARING" || it.status == "READY") && it.riderId == null }
 
         Spacer(modifier = Modifier.height(4.dp))
         if (activeDeliveringOrder != null) {
@@ -1636,7 +1644,7 @@ fun RiderView(viewModel: MainViewModel) {
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        if (activeDeliveringOrder.status == "PREPARING") {
+                        if (activeDeliveringOrder.status == "PREPARING" || activeDeliveringOrder.status == "PENDING") {
                             Text(text = "Waiting for merchant preparing...", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Button(onClick = { viewModel.updateOrderStatus(activeDeliveringOrder.id, "READY") }) {
                                 Text("Pick up order")
